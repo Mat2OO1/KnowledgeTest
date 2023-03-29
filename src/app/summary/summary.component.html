@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row" style="margin-top: 20px">
+    <div class="col-md-6 text-center">
+      <h1>Your results:</h1>
+      <div class="card border-dark" style="margin-bottom: 20px" *ngFor="let question of this.questions; let i = index">
+        <div class="card-header bg-dark text-white">Question {{i + 1}}</div>
+        <div class="card-body">
+          <p>{{this.question}}</p>
+            <div class="form-check" *ngFor="let answer of this.answers[question]">
+              <input
+                class="form-check-input"
+                type="radio"
+                [checked]="answer == this.userAnswers[i]"
+                disabled>
+              <p
+                class="form-check-label"
+                [ngClass]="answer === this.answers[question][0] ? 'text-success': 'text-danger'">
+                {{answer}}
+              </p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <h1 class="text-center">Your score:</h1>
+        <hr>
+        <h2 class="text-center">{{numOfCorrectAnswers}}/3</h2>
+      <div *ngIf="numOfQuestions!=8">
+      <div class="text-center" *ngIf="numOfCorrectAnswers==3">
+          <h2>Excelent score!</h2>
+          <br>
+          <h6>You may now proceed to the next lecture</h6>
+          <br>
+          <button (click)="nextLecture(true)" class="btn btn-success">Next Lecture</button>
+      </div>
+      <div class="text-center" *ngIf="numOfCorrectAnswers!=3 && !triedBefore">
+        <h2>You have to go back to the presentation and take the test once again</h2>
+        <br>
+        <button (click)="nextLecture(false)" class="btn btn-success">Replay Lecture</button>
+      </div>
+      <div class="text-center" *ngIf="numOfCorrectAnswers!=3 && triedBefore">
+        <h1>THE END</h1>
+      </div>
+    </div>
+    </div>
+    <div *ngIf="numOfQuestions==8">
+      <h2>Congratulations!</h2>
+      <br>
+      <h3>You finished our test</h3>
+    </div>
+    </div>
+  </div>
+</div>
