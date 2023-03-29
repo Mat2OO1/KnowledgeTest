@@ -14,7 +14,7 @@ export class PresentationComponent {
   constructor(private testService: TestService,
               private sanitizer: DomSanitizer,
               private router: Router) {
-    this.src = this.sanitizer.bypassSecurityTrustResourceUrl("assets/p" + this.testService.currentPresentation + ".pdf#toolbar=0&view=Fit");
+    this.src = this.sanitizer.bypassSecurityTrustResourceUrl("assets/p" + this.testService.currentPresentation);
   }
   showTitle(){
     return this.presentationTitle[this.testService.currentPresentation-1]
